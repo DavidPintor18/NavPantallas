@@ -1,3 +1,9 @@
+/*
+Autor:Pintor Aranda David Fecha:02/02/2020
+Practica: ActivityIndicator/Switch
+Materia:Desarrollo Movil Multiplataforma
+Profesor:Hector Saldaña Benitez
+*/
 import React, { Component } from 'react';
 import { View, Text, Button, } from 'react-native';
 

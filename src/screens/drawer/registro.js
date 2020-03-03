@@ -1,3 +1,9 @@
+/*
+Autor:Pintor Aranda David Fecha:02/02/2020
+Practica: ActivityIndicator/Switch
+Materia:Desarrollo Movil Multiplataforma
+Profesor:Hector Saldaña Benitez
+*/
 import React, { Component } from "react";
 import { Container,  Content, Card, CardItem, Text, Body, Button, Item, Label, Input, Icon, View } from "native-base";
 
@@ -27,7 +33,7 @@ class Registro extends Component {
                   
                   
                     <Item lineLabel>
-                      <Icon type = 'FontAwesome' name = 'user-circle-o'></Icon>
+                      <Icon type = 'FontAwesome' name = 'user'></Icon>
                       <Input placeholder= 'Nombre de usuario'/>
                     </Item>
                   <Item lineLabel>
@@ -52,10 +58,10 @@ class Registro extends Component {
             <Text style={misEstilos1.textCenter}>Registrate con:</Text>
               </CardItem>
             <CardItem>  
-              <Button style = {loginIcon.google }onPress={this.mensaje} ><Icon type = 'AntDesign' name = 'googleplus'></Icon></Button>
+              <Button style = {loginIcon.google }onPress={this.mensaje} ><Icon type = 'FontAwesome' name = 'google'></Icon></Button>
               </CardItem>
             <CardItem>
-              <Button style = { loginIcon.facebook} onPress={this.mensaje}><Icon type = 'Entypo' name = 'facebook'></Icon></Button>
+              <Button style = { loginIcon.facebook} onPress={this.mensaje}><Icon type = 'FontAwesome' name = 'facebook-f'></Icon></Button>
             </CardItem>
           </Card>
         </Content>
