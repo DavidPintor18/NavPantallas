@@ -1,99 +1,125 @@
-/*
-Autor:Pintor Aranda David Fecha:02/02/2020
+/*Autor:Pintor Aranda David Fecha:02/02/2020
 Practica: ActivityIndicator/Switch
 Materia:Desarrollo Movil Multiplataforma
-Profesor:Hector Saldaña Benitez
-*/
+Profesor:Hector Saldaña Benitez*/
 import React, { Component } from "react";
 import { Container, View, Content, Card, CardItem, Text, Body, Button, Item, Input, Icon } from 'native-base';
 import {StyleSheet,ActivityIndicator} from 'react-native';
 
 
 class Login extends Component {
-  
-  constructor(props) {
+  constructor(props){
     super(props);
-    this.state = {usuario: '', contra: ''};
-    this.state={
-      showIndicator: true
+    this.state = {
+      username : '',
+      pass : ''
+    
     }
   }
+  login = async () => {
+    let validarlog = await api.validarLog(this.state.username,this.state.pass)
+    if(validarlog.status == 1){
+      this.props.navigation.navigate('Principal');
+    }
+    else
+    {
+      Alert.alert('¡No has sido encontrado en la Base de Datos!');
 
-
-
-  componentDidMount()
-  {
-    setTimeout(()=>{
-      this.setState({
-        showIndicator: false
-      })
-      
-
-    },500)
+    }
   }
+    userLogin = () =>{ 
+
+      const {username} = this.state;
+      const {pass} = this.state;
+ 
   
-  state={
-    showIndicator:false,
-  }
-
-
-
-
-  onButtonPress = () => 
-  {this.setState(),
-  this.props.navigation.navigate('Perfil',{pass: this.state.contra, usuario: this.state.usuario});
-  }
-
+      fetch('http://192.168.1.67/iot/data/login.php',{ 
+        method: 'post',
+        header: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        body:JSON.stringify({
+          pUsuario: username,
+          pPass: pass
+          
+        })
+  
+      })
+      .then((response) => response.text())
+        .then((responseData) =>{
+         
+          Alert.alert("Bienvenido")
+          if(responseData == 1){
+            this.props.navigation.navigate('Principal');
+          }
+          else
+          {
+            Alert.alert('Usuario o contraseña invalidos ');
+      
+          }
+          
+        
+        })
+        .catch((error)=>{
+            console.error(error);
+        
+        });
+        
+    }
     
-    render(){
-    if(this.state.showIndicator  ){
-      return (
-      <View style={misEstilos.content}>
-        <ActivityIndicator size="large" color="FFFFFF"></ActivityIndicator>
-      </View>
-    );  
-  }
-  else{  
+  
+ 
+  render(){
+  const navegar = this.props.navigation;
+ 
     return (
         <>
-          <Container>
+        
+        <Container>
             <Content padder contentContainerStyle = {misEstilos.content}>
-              <Card>
+            <Card>
                 <CardItem header bordered style= {misEstilos.arribaTexto}>
-                  <Text style = {misEstilos.textCenter} >Login</Text>
+    <Text style = {misEstilos.textCenter} >Login</Text>
                 </CardItem>
-                <CardItem>
-                  <Body style = {misEstilos.body}>
-                      <Item lineLabel>
-                        <Icon type = 'FontAwesome' name = 'user'></Icon>
-                          <Input type="text" 
+                <CardItem bordered style= {misEstilos.abajoDatos}>
+                <Body style = {misEstilos.body}>
+                    <Item lineLabel>
+                        <Icon type = 'FontAwesome' name = 'user-circle-o'></Icon>
+                        <Input type="text" 
                                 placeholder="Usuario"
-                                value= {this.state.usuario}
-                                onChangeText= {(usuario) => this.setState({usuario})}/>
-                      </Item>
-                
-                      <Item lineLabel>
-                        <Icon type = 'FontAwesome' name = 'lock'></Icon>
-                        <Input type="text" placeholder = 'Constraseña' 
-                              value= {this.state.contra}
-                              onChangeText= {(contra) => this.setState({contra})}/>
-                      </Item>
-                  </Body>
-                </CardItem>
-                <CardItem footer bordered style = { misEstilos.pie}>
+                                onChangeText= {(username) => this.setState({username})}
+                        />
 
-                <Button primary style= {loginButton.loginButton} 
-                        onPress={this.onButtonPress}>
-                        <Text>Aceptar</Text></Button>
+                    </Item>
+                  
+                    <Item lineLabel>
+                        <Icon type = 'Ionicons' name = 'ios-lock'></Icon>
+                        <Input type="text" placeholder = 'Constraseña' 
+                            onChangeText= {(pass) => this.setState({pass})}/>
+                    </Item>
+                </Body>
                 </CardItem>
-              </Card>
+                <CardItem footer bordered style = {misEstilos.pie}>
+                
+                
+                <Button success onPress={() => navegar.navigate('Registro')} ><Text> Registrarse </Text></Button>
+            
+                </CardItem>
+                <CardItem footer bordered style = {misEstilos.pie}>
+                
+                <Button primary onPress={this.userLogin} ><Text> Iniciar Sesión </Text></Button>
+                </CardItem>
+            </Card>
             </Content>
-          </Container>
+        </Container>
+        
+        
         </>
-      );
+    );
     }
   }
-};
+
 
 
 const misEstilos = StyleSheet.create({

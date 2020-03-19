@@ -1,9 +1,7 @@
-/*
-Autor:Pintor Aranda David Fecha:02/02/2020
+/*Autor:Pintor Aranda David Fecha:02/02/2020
 Practica: ActivityIndicator/Switch
 Materia:Desarrollo Movil Multiplataforma
-Profesor:Hector Saldaña Benitez
-*/
+Profesor:Hector Saldaña Benitez*/
 import React, { Component } from "react";
 
 import Inicio from "./src/inicio";
@@ -15,6 +13,7 @@ import Screen3 from './src/screens/drawer/screen3';
 import Login from './src/screens/drawer/login';
 import Registro from './src/screens/drawer/registro';
 import Perfil from './src/screens/drawer/perfil';
+import  Api from './src/screens/drawer/Api'
 
 
 
@@ -38,6 +37,7 @@ export default class App extends Component {
     <Stack.Screen name="Inicio de sesión" component = {Login}></Stack.Screen>
     <Stack.Screen name="Registro" component = {Registro}></Stack.Screen>
     <Stack.Screen name="Perfil" component = {Perfil}></Stack.Screen>
+    <Stack.Screen name="Api" component = {Api}></Stack.Screen>
   </Stack.Navigator>
   
   render(){
