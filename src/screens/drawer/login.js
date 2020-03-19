@@ -40,7 +40,7 @@ class Login extends Component {
 
 
   onButtonPress = () => 
-  {this.setState({showIndicator: true}),
+  {this.setState(),
   this.props.navigation.navigate('Perfil',{pass: this.state.contra, usuario: this.state.usuario});
   }
 
